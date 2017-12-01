@@ -1,2 +1,2 @@
 # marcedit_xslt_files
-Shared XSLT Files
+XSLT Files used or created for MarcEdit.  
