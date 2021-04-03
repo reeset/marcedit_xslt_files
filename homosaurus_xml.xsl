@@ -40,6 +40,34 @@
         </datafield>
       </xsl:if>
 
+      <!--***************************************************************
+          * To add your cataloging institution code to the 040
+          * use the <subfield code="[yoursubfied">[your data]</subfield>
+          * template.  
+          * for example; modify the below to use Ohio State would look like
+          <datafield tag="040" ind1=" " ind2=" ">
+             <subfield code="a">OSU</subfield>
+             <subfield code="f">homosaurus</subfield>
+             <subfield code="c">OSU</subfield>
+          </datafield>
+          *****************************************************************
+      -->
+      <datafield tag="040" ind1=" " ind2 = " ">
+         <subfield code="f">homosaurus</subfield>
+      </datafield>
+      
+
+      <!--**************************************************************
+          * At this point (4/3/2021), the vocabulary does not provide a 
+          * conceptual definition between topical vocab elements versus
+          * genre elements.  In MARC, this is an important distinction
+          * however, to represent the vocabulary faithfully, unless this 
+          * distinction is coded into the terms, applying a genre 
+          * context would be inferrence and would arguably no longer
+          * faithfully representing the vocabulary or intended use.
+          * Until the vocabulary explains variations in Concept, 
+          * all terms are treated as topics.
+      -->
       <xsl:if test="//prefLabel">
         <datafield tag="150" ind1=" " ind2=" ">
           <subfield code="a">
