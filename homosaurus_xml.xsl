@@ -58,6 +58,11 @@
       
       <xsl:for-each select="//hasTopConcept">
         <datafield tag="550" ind1=" " ind2=" ">
+          <xsl:if test="./prefLabel">
+            <subfield code="a">
+              <xsl:value-of select="./prefLabel" />
+            </subfield>
+          </xsl:if>
           <subfield code="0">
             <xsl:value-of select="./id" />
           </subfield>
@@ -66,6 +71,11 @@
 
       <xsl:for-each select="//broader">
         <datafield tag="550" ind1=" " ind2=" ">
+          <xsl:if test="./prefLabel">
+            <subfield code="a">
+              <xsl:value-of select="./prefLabel" />
+            </subfield>
+          </xsl:if>
           <subfield code="0">
             <xsl:value-of select="./id" />
           </subfield>
