@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" 
-                xmlns:dc="http://purl.org/dc/elements/1.1/"
-                xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-                xmlns="http://www.loc.gov/MARC21/slim" 
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  
+<xsl:stylesheet version="1.0"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns="http://www.loc.gov/MARC21/slim"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
   <xsl:output method="xml" indent="yes"/>
 
   <xsl:template match="/">
-    <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" >
+    <record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
       <leader>00596nz  a2200217n  4500</leader>
 
       <xsl:variable name="mod_date">
@@ -24,9 +24,10 @@
         </xsl:choose>
 
       </xsl:variable>"
-      <!-- Control field 008 needs processed-->
+                  <!-- Control field 008 needs processed-->
       <controlfield tag="008">
-        <xsl:value-of select="$mod_date"/>|||anznnbab||||||||||||||a|||||||d
+        <xsl:value-of select="$mod_date"/>
+|||anznnbab||||||||||||||a|||||||d
       </controlfield>
 
       <xsl:if test="//identifier">
@@ -53,9 +54,9 @@
           *****************************************************************
       -->
       <datafield tag="040" ind1=" " ind2 = " ">
-         <subfield code="f">homosaurus</subfield>
+        <subfield code="f">homosaurus</subfield>
       </datafield>
-      
+
 
       <!--**************************************************************
           * At this point (4/3/2021), the vocabulary does not provide a 
@@ -83,38 +84,46 @@
           </subfield>
         </datafield>
       </xsl:for-each>
-      
+
       <xsl:for-each select="//hasTopConcept">
-        <datafield tag="550" ind1=" " ind2=" ">
-          <xsl:if test="./prefLabel">
-            <subfield code="a">
-              <xsl:value-of select="./prefLabel" />
-            </subfield>
-          </xsl:if>
-          <subfield code="0">
-            <xsl:value-of select="./id" />
-          </subfield>
-        </datafield>
+        <xsl:if test ="./prefLabel or ./id">
+          <datafield tag="550" ind1=" " ind2=" ">
+            <xsl:if test="./prefLabel">
+              <subfield code="a">
+                <xsl:value-of select="./prefLabel" />
+              </subfield>
+            </xsl:if>
+            <xsl:if test="./id">
+              <subfield code="0">
+                <xsl:value-of select="./id" />
+              </subfield>
+            </xsl:if>
+          </datafield>
+        </xsl:if>
       </xsl:for-each>
 
       <xsl:for-each select="//broader">
-        <datafield tag="550" ind1=" " ind2=" ">
-          <xsl:if test="./prefLabel">
-            <subfield code="a">
-              <xsl:value-of select="./prefLabel" />
-            </subfield>
-          </xsl:if>
-          <subfield code="0">
-            <xsl:value-of select="./id" />
-          </subfield>
-        </datafield>
+        <xsl:if test ="./prefLabel or ./id">
+          <datafield tag="550" ind1=" " ind2=" ">
+            <xsl:if test="./prefLabel">
+              <subfield code="a">
+                <xsl:value-of select="./prefLabel" />
+              </subfield>
+            </xsl:if>
+            <xsl:if test="./id">
+              <subfield code="0">
+                <xsl:value-of select="./id" />
+              </subfield>
+            </xsl:if>
+          </datafield>
+        </xsl:if>
       </xsl:for-each>
 
       <xsl:for-each select="//comment">
         <datafield tag="680" ind1=" " ind2=" ">
           <subfield code="a">
             <xsl:value-of select="." />
-          </subfield>          
+          </subfield>
         </datafield>
       </xsl:for-each>
 
